@@ -36,26 +36,10 @@ namespace WSD_Project.Migrations
                     b.Property<DateTime>("Checkout")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Room_no")
-                        .HasColumnType("int");
-
-                    b.Property<int>("cust_id")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("customercust_id")
-                        .HasColumnType("int");
-
                     b.Property<int>("noOfPersons")
                         .HasColumnType("int");
 
-                    b.Property<int?>("roomtypeRoom_no")
-                        .HasColumnType("int");
-
                     b.HasKey("BookId");
-
-                    b.HasIndex("customercust_id");
-
-                    b.HasIndex("roomtypeRoom_no");
 
                     b.ToTable("Bookings");
                 });
@@ -88,8 +72,9 @@ namespace WSD_Project.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("mobile")
-                        .HasColumnType("int");
+                    b.Property<string>("mobile")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("cust_id");
 
@@ -107,21 +92,6 @@ namespace WSD_Project.Migrations
                     b.HasKey("Room_no");
 
                     b.ToTable("Rooms");
-                });
-
-            modelBuilder.Entity("WSD_Project.Models.Booking", b =>
-                {
-                    b.HasOne("WSD_Project.Models.Customer", "customer")
-                        .WithMany()
-                        .HasForeignKey("customercust_id");
-
-                    b.HasOne("WSD_Project.Models.Room_Category", "roomtype")
-                        .WithMany()
-                        .HasForeignKey("roomtypeRoom_no");
-
-                    b.Navigation("customer");
-
-                    b.Navigation("roomtype");
                 });
 #pragma warning restore 612, 618
         }

@@ -11,7 +11,7 @@ namespace WSD_Project.Models
         [Required]
         public string? Email { get; set; }
         [Required]
-        public int mobile { get; set; }
+        public string? mobile { get; set; }
         [Required]
         public string? address { get; set; }
         [Required]
