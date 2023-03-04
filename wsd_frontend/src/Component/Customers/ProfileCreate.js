@@ -5,11 +5,13 @@ import { Button } from '@mui/material';
 import axios from 'axios';
 import './Customer.css';
 // console.log("Customer")
-function Customerprofile() {
+function ProfileCreate() {
 
   const [details,setdetail]=useState({
     id:"",name:"",email:"",mobile:"",city:"",state:"",address:""
   })
+  
+  
   async function save(event) {
   
     event.preventDefault();
@@ -25,20 +27,25 @@ function Customerprofile() {
       
       });
       alert("Thanks!! Your Profile is being Created Succesfully");
-          setdetail("");
+      setdetail("");
       
-    
-      // Load();
-    } catch (err) {
+    } 
+    catch (err) {
       alert(err);
     }
   }
+  
   let name,value;
   const onChangeInput=(e)=>{
      name=e.target.name;
     value=e.target.value;
     setdetail({...details,[name]:value});
   }
+  
+  
+  
+  
+  
   return (
     <div>
       <MenuAppBar />
@@ -119,57 +126,19 @@ function Customerprofile() {
               />
             <br />
             <Button variant="contained" color="primary" onClick={save}>
-              Save
+              Create Profile
             </Button>
-          
+            
         </form>
       </div>
       <br></br>
           </center>
-
-      {/* <table class="table table-dark" align="center">
-        <thead>
-          <tr>
-            <th scope="col">Student Id</th>
-            <th scope="col">Student Name</th>
-            <th scope="col">Course</th>
-
-            <th scope="col">Option</th>
-          </tr>
-        </thead>
-        {students.map(function fn(student) {
-          return (
-            <tbody>
-              <tr>
-                <th scope="row">{student.id} </th>
-                <td>{student.stname}</td>
-                <td>{student.course}</td>
-
-                <td>
-                  <button
-                    type="button"
-                    class="btn btn-warning"
-                    onClick={() => editStudent(student)}
-                  >
-                    Edit
-                  </button>
-                  <button
-                    type="button"
-                    class="btn btn-danger"
-                    onClick={() => DeleteStudent(student.id)}
-                  >
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          );
-        })}
-      </table> */}
+           
+      
 
     </div>
 
   );
 }
 
-export default Customerprofile
+export default ProfileCreate

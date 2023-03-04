@@ -8,8 +8,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-import { useNavigate } from "react-router-dom";
-import { yellow } from '@mui/material/colors';
+
 
 export default function MenuAppBar() {
   const [auth, setAuth] = React.useState(true);
@@ -25,7 +24,7 @@ export default function MenuAppBar() {
   };
   const handleProfile = () => {
     setAnchorEl(null);
-    window.location.href = '/myprofile';
+    window.location.href = '/myprofile/create';
   };
 
   return (
