@@ -38,7 +38,7 @@ function ProfileUpdate() {
         <div>
         <MenuAppBar/>
         <center>
-        <h3>Update Your Profile</h3>
+        <div className="info container">Update Your Profile</div><br />
 
 <div className="container mt-4">
 

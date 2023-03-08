@@ -56,7 +56,7 @@ function ProfileRead() {
     <div>
       <MenuAppBar />
       <div>
-      <h3>Customer Profiles</h3>
+      <div className="info container">Customers Profile</div><br />
         <Table>
           <TableHead>
             <TableRow>

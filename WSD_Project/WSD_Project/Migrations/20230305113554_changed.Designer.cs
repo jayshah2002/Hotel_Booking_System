@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WSD_Project.Models;
 
@@ -11,9 +12,11 @@ using WSD_Project.Models;
 namespace WSD_Project.Migrations
 {
     [DbContext(typeof(CustomerDbcontext))]
-    partial class CustomerDbcontextModelSnapshot : ModelSnapshot
+    [Migration("20230305113554_changed")]
+    partial class changed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -39,18 +42,13 @@ namespace WSD_Project.Migrations
                     b.Property<string>("Room_type")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("cust_id")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("customercust_id")
+                    b.Property<int?>("cust_id")
                         .HasColumnType("int");
 
                     b.Property<int>("noOfPersons")
                         .HasColumnType("int");
 
                     b.HasKey("BookId");
-
-                    b.HasIndex("customercust_id");
 
                     b.ToTable("Bookings");
                 });
@@ -103,15 +101,6 @@ namespace WSD_Project.Migrations
                     b.HasKey("Room_no");
 
                     b.ToTable("Rooms");
-                });
-
-            modelBuilder.Entity("WSD_Project.Models.Booking", b =>
-                {
-                    b.HasOne("WSD_Project.Models.Customer", "customer")
-                        .WithMany()
-                        .HasForeignKey("customercust_id");
-
-                    b.Navigation("customer");
                 });
 #pragma warning restore 612, 618
         }

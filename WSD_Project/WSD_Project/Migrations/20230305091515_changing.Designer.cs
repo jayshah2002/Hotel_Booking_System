@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WSD_Project.Models;
 
@@ -11,9 +12,11 @@ using WSD_Project.Models;
 namespace WSD_Project.Migrations
 {
     [DbContext(typeof(CustomerDbcontext))]
-    partial class CustomerDbcontextModelSnapshot : ModelSnapshot
+    [Migration("20230305091515_changing")]
+    partial class changing
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

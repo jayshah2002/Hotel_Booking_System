@@ -11,47 +11,47 @@ namespace WSD_Project.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CustomersController : ControllerBase
+    public class BookingsController : ControllerBase
     {
         private readonly CustomerDbcontext _context;
 
-        public CustomersController(CustomerDbcontext context)
+        public BookingsController(CustomerDbcontext context)
         {
             _context = context;
         }
 
-        // GET: api/Customers
+        // GET: api/Bookings
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Customer>>> GetCustomers()
+        public async Task<ActionResult<IEnumerable<Booking>>> GetBookings()
         {
-            return await _context.Customers.ToListAsync();
+            return await _context.Bookings.ToListAsync();
         }
 
-        // GET: api/Customers/5
+        // GET: api/Bookings/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Customer>> GetCustomer(int id)
+        public async Task<ActionResult<Booking>> GetBooking(int id)
         {
-            var customer = await _context.Customers.FindAsync(id);
+            var booking = await _context.Bookings.FindAsync(id);
 
-            if (customer == null)
+            if (booking == null)
             {
                 return NotFound();
             }
 
-            return customer;
+            return booking;
         }
 
-        // PUT: api/Customers/5
+        // PUT: api/Bookings/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCustomer(int id, Customer customer)
+        public async Task<IActionResult> PutBooking(int id, Booking booking)
         {
-            if (id != customer.cust_id)
+            if (id != booking.BookId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(customer).State = EntityState.Modified;
+            _context.Entry(booking).State = EntityState.Modified;
 
             try
             {
@@ -59,7 +59,7 @@ namespace WSD_Project.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CustomerExists(id))
+                if (!BookingExists(id))
                 {
                     return NotFound();
                 }
@@ -72,40 +72,36 @@ namespace WSD_Project.Controllers
             return NoContent();
         }
 
-        // POST: api/Customers
+        // POST: api/Bookings
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Customer>> PostCustomer(Customer customer)
+        public async Task<ActionResult<Booking>> PostBooking(Booking booking)
         {
-            
-                _context.Customers.Add(customer);
-               
-                await _context.SaveChangesAsync();
-               
-            
+            _context.Bookings.Add(booking);
+            await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetCustomer", new { id = customer.cust_id }, customer);
+            return CreatedAtAction("GetBooking", new { id = booking.BookId }, booking);
         }
 
-        // DELETE: api/Customers/5
+        // DELETE: api/Bookings/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCustomer(int id)
+        public async Task<IActionResult> DeleteBooking(int id)
         {
-            var customer = await _context.Customers.FindAsync(id);
-            if (customer == null)
+            var booking = await _context.Bookings.FindAsync(id);
+            if (booking == null)
             {
                 return NotFound();
             }
 
-            _context.Customers.Remove(customer);
+            _context.Bookings.Remove(booking);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool CustomerExists(int id)
+        private bool BookingExists(int id)
         {
-            return _context.Customers.Any(e => e.cust_id == id);
+            return _context.Bookings.Any(e => e.BookId == id);
         }
     }
 }

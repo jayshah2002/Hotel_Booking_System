@@ -3,6 +3,7 @@ import MenuAppBar from '../MenuAppBar';
 import { TextField } from '@mui/material';
 import { Button } from '@mui/material';
 import axios from 'axios';
+
 import './Customer.css';
 // console.log("Customer")
 function ProfileCreate() {
@@ -10,8 +11,7 @@ function ProfileCreate() {
   const [details,setdetail]=useState({
     id:"",name:"",email:"",mobile:"",city:"",state:"",address:""
   })
-  
-  
+ 
   async function save(event) {
   
     event.preventDefault();
@@ -128,6 +128,7 @@ function ProfileCreate() {
             <Button variant="contained" color="primary" onClick={save}>
               Create Profile
             </Button>
+           
             
         </form>
       </div>

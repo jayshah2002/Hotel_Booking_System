@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WSD_Project.Models;
 
@@ -11,9 +12,11 @@ using WSD_Project.Models;
 namespace WSD_Project.Migrations
 {
     [DbContext(typeof(CustomerDbcontext))]
-    partial class CustomerDbcontextModelSnapshot : ModelSnapshot
+    [Migration("20230305080341_change")]
+    partial class change
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -39,10 +42,7 @@ namespace WSD_Project.Migrations
                     b.Property<string>("Room_type")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("cust_id")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("customercust_id")
+                    b.Property<int?>("cust_id1")
                         .HasColumnType("int");
 
                     b.Property<int>("noOfPersons")
@@ -50,7 +50,7 @@ namespace WSD_Project.Migrations
 
                     b.HasKey("BookId");
 
-                    b.HasIndex("customercust_id");
+                    b.HasIndex("cust_id1");
 
                     b.ToTable("Bookings");
                 });
@@ -107,11 +107,11 @@ namespace WSD_Project.Migrations
 
             modelBuilder.Entity("WSD_Project.Models.Booking", b =>
                 {
-                    b.HasOne("WSD_Project.Models.Customer", "customer")
+                    b.HasOne("WSD_Project.Models.Customer", "cust_id")
                         .WithMany()
-                        .HasForeignKey("customercust_id");
+                        .HasForeignKey("cust_id1");
 
-                    b.Navigation("customer");
+                    b.Navigation("cust_id");
                 });
 #pragma warning restore 612, 618
         }

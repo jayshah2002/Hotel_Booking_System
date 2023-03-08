@@ -12,5 +12,6 @@ namespace WSD_Project.Models
 
         public DbSet<Booking> Bookings { get; set; }
         public DbSet<Room_Category> Rooms { get; set; }
+
     }
 }
