@@ -5,6 +5,7 @@ import MenuAppBar from "../MenuAppBar";
 
 function ProfileUpdate() {
     const [name, setName] = useState('');
+  
     const [email, setEmail] = useState('');
     const [mobile, setMobile] = useState('');
     const [city, setCity] = useState('');
@@ -21,10 +22,14 @@ function ProfileUpdate() {
         setState(localStorage.getItem('State'));
         setAddress(localStorage.getItem('Address'));
     }, []);
-
+    const username=localStorage.getItem('Username')
+    const password=localStorage.getItem("Password")
+    console.log(id)
     const updateData = () => {
-        axios.put(`https://localhost:7200/api/Customers/${id}`, {
-            cust_id: id,
+        axios.put(`https://localhost:7159/api/Users/${id}`, {
+            Id: id,
+            username:username,
+            password:password,
             name: name,
             email: email,
             mobile: mobile,
@@ -32,6 +37,8 @@ function ProfileUpdate() {
             state: state,
             address: address
         })
+        console.log(name)
+        console.log(email)
         alert("Your Profile is Update SuccessFully");
     }
     return (
@@ -53,6 +60,8 @@ function ProfileUpdate() {
         value={name}
         onChange = {(e) => setName(e.target.value)} 
         />
+   
+      
       <br />
       <TextField
         style={{ width: "200px", margin: "5px" }}

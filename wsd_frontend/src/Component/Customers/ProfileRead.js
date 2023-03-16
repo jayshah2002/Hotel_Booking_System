@@ -15,38 +15,28 @@ function ProfileRead() {
     <MenuAppBar/>
     const [detail, setDetail] = useState([]);
     useEffect(() => {
-        axios.get('https://localhost:7200/api/Customers')
+        axios.get('https://localhost:7159/api/Users')
         .then((response) => {
             console.log(response.data)
             setDetail(response.data);
         })
       },[])
   
-      const setData = (data) => {
-        console.log(data);
-        let {cust_id, name,email,mobile,city,state,address} = data;
-        localStorage.setItem('Id',cust_id);
-        localStorage.setItem('Name',name);
-        localStorage.setItem('Email',email);
-        localStorage.setItem('Mobile',mobile);
-        localStorage.setItem('City',city);
-        localStorage.setItem('State',state);
-        localStorage.setItem('Address',address);
-      }
+      
       const getData = () => {
-        axios.get('https://localhost:7200/api/Customers')
+        axios.get('https://localhost:7159/api/Users')
         .then((getData)=>{
           setDetail(getData.data);
         })
       }
       const onDelete = (id) =>{
         
-        axios.delete(`https://localhost:7200/api/Customers/${id}`)
+        axios.delete(`https://localhost:7159/api/Users/${id}`)
         .then(()=>{
           getData();
         })
       } 
-      console.log(detail.forEach(data => console.log(data.cust_id)) );
+      console.log(detail.forEach(data => console.log(data.Id)) );
       
   
   
@@ -61,6 +51,7 @@ function ProfileRead() {
           <TableHead>
             <TableRow>
               <TableCell>Id</TableCell>
+              <TableCell>UserName</TableCell>
               <TableCell>Name</TableCell>
               <TableCell>Email</TableCell>
               <TableCell>Mobile Number</TableCell>
@@ -75,17 +66,16 @@ function ProfileRead() {
                     (data) =>{ 
                         return (
                         <TableRow>
-                            <TableCell>{data.cust_id}</TableCell>  
+                            <TableCell>{data.id}</TableCell> 
+                            <TableCell>{data.userName}</TableCell> 
                             <TableCell >{data.name}</TableCell>
                             <TableCell >{data.email}</TableCell>
                             <TableCell >{data.mobile}</TableCell>
                             <TableCell >{data.city}</TableCell>
                             <TableCell >{data.state}</TableCell>
                             <TableCell >{data.address}</TableCell>
-                            <Link to ='/myprofile/update'>
-                            <TableCell ><Button className="btn btn-success" onClick={()=>setData(data)}>Edit</Button></TableCell>
-                            </Link> 
-                            <TableCell ><Button onClick={()=>onDelete(data.cust_id)}>Delete</Button></TableCell>
+                            
+                            <TableCell ><Button onClick={()=>onDelete(data.id)}>Delete</Button></TableCell>
                         </TableRow>
                         )
                     }
