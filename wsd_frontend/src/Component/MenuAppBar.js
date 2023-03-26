@@ -8,26 +8,25 @@ import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-import {NavLink, useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import { Button } from 'react-bootstrap';
-import { useEffect,useState } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
+
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 export default function MenuAppBar() {
   const [auth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [detail, setDetail] = useState([]);
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   useEffect(() => {
     axios.get('https://localhost:7159/api/Users')
-    .then((response) => {
+      .then((response) => {
         console.log(response.data)
         setDetail(response.data);
         setData(localStorage.getItem("Token"))
-    })
-  },[])
-  
+      })
+  }, [])
+
   // const getData = () => {
   //   axios.get('https://localhost:7159/api/Users')
   //   .then((getData)=>{
@@ -36,9 +35,9 @@ export default function MenuAppBar() {
   // }
   const setData = (data) => {
     console.log(data);
-    let {Id} = data;
-    localStorage.setItem('Id',data);
-    
+    let { Id } = data;
+    localStorage.setItem('Id', data);
+
     // localStorage.setItem('Username',username)
     // localStorage.setItem('Name',name);
     // localStorage.setItem('Email',email);
@@ -57,15 +56,22 @@ export default function MenuAppBar() {
     setAnchorEl(null);
     window.location.href = '/login';
   };
-  const handleLogout=()=>{
+  const handleUpdateBook = () => {
+
+    navigate("/book/update")
+  }
+  const handleBook = () => {
+    navigate("/book/create")
+  }
+  const handleLogout = () => {
     localStorage.clear()
     navigate("/login")
   }
   return (
-    
+
     <Box sx={{ flexGrow: 1 }} >
       <AppBar position="static" >
-        <Toolbar style={{backgroundColor:'yellowgreen'}}>
+        <Toolbar style={{ backgroundColor: 'yellowgreen' }}>
           <IconButton
             size="large"
             edge="start"
@@ -103,21 +109,28 @@ export default function MenuAppBar() {
                   horizontal: 'right',
                 }}
                 open={Boolean(anchorEl)}
-                
+
               >
                 <MenuItem onClick={handleHome}>Home</MenuItem>
-                
-                {!(localStorage.getItem("Username"))?
-                <MenuItem onClick={handleLogin}>Login</MenuItem>
-                :
-                <MenuItem onClick={handleLogout}>Logout</MenuItem>}
-                
+
+                {!(localStorage.getItem("Username")) ?
+                  <MenuItem onClick={handleLogin}>Login</MenuItem>
+                  :
+                  <MenuItem onClick={handleLogout}>Logout</MenuItem>}
+
+                {!(localStorage.getItem("Username")) ?
+                  <MenuItem onClick={handleLogin}>Book Now</MenuItem>
+                  :
+                  <MenuItem onClick={handleBook}>Book Now</MenuItem>}
+                <MenuItem onClick={handleUpdateBook}>Update Booking</MenuItem>
               </Menu>
             </div>
           )}
-          {(localStorage.getItem("Username"))?<NavLink to="/myprofile/update"><MenuItem onClick={()=>setData(localStorage.getItem("Token"))}>Edit
-                            </MenuItem></NavLink>:<div></div>}
-          
+          {(localStorage.getItem("Username")) ? <NavLink to="/myprofile/update"><MenuItem onClick={() => setData(localStorage.getItem("Token"))}>Update Profile
+          </MenuItem></NavLink> : <div></div>}
+          {(localStorage.getItem("Username")) ? <NavLink to="/book/update"><MenuItem onClick={() => setData(localStorage.getItem("bookID"))}>Update Booking
+          </MenuItem></NavLink> : <div></div>}
+
         </Toolbar>
       </AppBar>
     </Box>

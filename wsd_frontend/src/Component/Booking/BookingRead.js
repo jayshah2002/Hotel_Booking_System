@@ -8,45 +8,36 @@ import TableRow from "@mui/material/TableRow";
 import { Button } from '@mui/material';
 import axios from 'axios';
 import "react-bootstrap"
-import { Link } from "react-router-dom";
+
 
 function BookingRead() {
     <MenuAppBar/>
     const [detail, setDetail] = useState([]);
     useEffect(() => {
-        axios.get('https://localhost:7200/api/Bookings')
+        axios.get('https://localhost:7159/api/Bookings')
         .then((response) => {
             console.log(response.data)
             setDetail(response.data);
         })
       },[])
   
-      const setData = (data) => {
-        console.log(data);
-        let {cust_id, name,email,mobile,city,state,address} = data;
-        localStorage.setItem('Id',cust_id);
-        localStorage.setItem('Name',name);
-        localStorage.setItem('Email',email);
-        localStorage.setItem('Mobile',mobile);
-        localStorage.setItem('City',city);
-        localStorage.setItem('State',state);
-        localStorage.setItem('Address',address);
-      }
+      
       const getData = () => {
-        axios.get('https://localhost:7200/api/Customers')
+        axios.get('https://localhost:7159/api/Bookings')
         .then((getData)=>{
           setDetail(getData.data);
         })
       }
       const onDelete = (id) =>{
         
-        axios.delete(`https://localhost:7200/api/Customers/${id}`)
+        axios.delete(`https://localhost:7159/api/Bookings/${id}`)
         .then(()=>{
           getData();
         })
       } 
-      console.log(detail.forEach(data => console.log(data.cust_id)) );
+      console.log(detail.forEach(data => console.log(data.Id)) );
       
+  
   
     return (
         <div>
@@ -57,7 +48,7 @@ function BookingRead() {
             <TableHead>
               <TableRow>
                 <TableCell>BookId</TableCell>
-                <TableCell>Name</TableCell>
+                <TableCell>UserName</TableCell>
                 <TableCell>Number of Persons</TableCell>
                 <TableCell>CheckIn</TableCell>
                 <TableCell>CheckOut</TableCell>
@@ -65,27 +56,24 @@ function BookingRead() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {
-                  detail.map(
-                      (data) =>{ 
-                          return (
-                          <TableRow>
-                              <TableCell>{data.cust_id}</TableCell>  
-                              <TableCell >{data.name}</TableCell>
-                              <TableCell >{data.email}</TableCell>
-                              <TableCell >{data.mobile}</TableCell>
-                              <TableCell >{data.city}</TableCell>
-                              <TableCell >{data.state}</TableCell>
-                              <TableCell >{data.address}</TableCell>
-                              <Link to ='/myprofile/update'>
-                              <TableCell ><Button className="btn btn-success" onClick={()=>setData(data)}>Edit</Button></TableCell>
-                              </Link> 
-                              <TableCell ><Button onClick={()=>onDelete(data.cust_id)}>Delete</Button></TableCell>
-                          </TableRow>
-                          )
-                      }
-                  )
-              }
+            {
+                detail.map(
+                    (data) =>{ 
+                        return (
+                        <TableRow>
+                            <TableCell>{data.bookId}</TableCell> 
+                            <TableCell>{data.userName}</TableCell> 
+                            <TableCell >{data.noOfPersons}</TableCell>
+                            <TableCell >{data.checkin}</TableCell>
+                            <TableCell >{data.checkout}</TableCell>
+                            <TableCell >{data.room_type}</TableCell>
+                            
+                            <TableCell ><Button onClick={()=>onDelete(data.bookId)}>Delete</Button></TableCell>
+                        </TableRow>
+                        )
+                    }
+                )
+            }
             </TableBody>
           </Table>
       </div>

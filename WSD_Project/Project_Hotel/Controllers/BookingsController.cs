@@ -24,6 +24,10 @@ namespace Project_Hotel.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Booking>>> GetBookings()
         {
+          if (_context.Bookings == null)
+          {
+              return NotFound();
+          }
             return await _context.Bookings.ToListAsync();
         }
 
@@ -31,6 +35,10 @@ namespace Project_Hotel.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Booking>> GetBooking(int id)
         {
+          if (_context.Bookings == null)
+          {
+              return NotFound();
+          }
             var booking = await _context.Bookings.FindAsync(id);
 
             if (booking == null)
@@ -77,6 +85,10 @@ namespace Project_Hotel.Controllers
         [HttpPost]
         public async Task<ActionResult<Booking>> PostBooking(Booking booking)
         {
+          if (_context.Bookings == null)
+          {
+              return Problem("Entity set 'HotelDBContext.Bookings'  is null.");
+          }
             _context.Bookings.Add(booking);
             await _context.SaveChangesAsync();
 
@@ -87,6 +99,10 @@ namespace Project_Hotel.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBooking(int id)
         {
+            if (_context.Bookings == null)
+            {
+                return NotFound();
+            }
             var booking = await _context.Bookings.FindAsync(id);
             if (booking == null)
             {
@@ -101,7 +117,7 @@ namespace Project_Hotel.Controllers
 
         private bool BookingExists(int id)
         {
-            return _context.Bookings.Any(e => e.BookId == id);
+            return (_context.Bookings?.Any(e => e.BookId == id)).GetValueOrDefault();
         }
     }
 }

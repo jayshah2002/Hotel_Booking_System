@@ -12,13 +12,14 @@ function BookingCreate() {
     const [details, setdetail] = useState({
         bookid: "", person: "", checkin: "", checkout: "", roomType: ""
     })
-
+    const username=localStorage.getItem("Username")
+    console.log(username)   
     async function save(event) {
 
         event.preventDefault();
         try {
-            await axios.post("https://localhost:7200/api/Bookings", {
-
+            const book=await axios.post("https://localhost:7159/api/Bookings", {
+                userName:username,
                 noOfPersons: details.person,
                 Checkin: details.checkin,
                 Checkout: details.checkout,
@@ -26,6 +27,8 @@ function BookingCreate() {
     
 
             });
+            console.log(book.data);
+            localStorage.setItem("bookID",book.data.bookId);
             alert("Thank you for visiting our site Your booking is Confirmed Successfully ");
             setdetail("");
 
@@ -56,7 +59,7 @@ function BookingCreate() {
                             id="bookid"
                             name="bookid"
                             hidden
-                            value={details.id}
+                            value={details.bookid}
                             onChange={onChangeInput}
                         />
 
@@ -67,43 +70,43 @@ function BookingCreate() {
                             label="Number of Persons"
                             name="person"
                             variant="outlined"
-                            value={details.name}
+                            value={details.person}
                             onChange={onChangeInput}
                         />
                         <br />
+                        <InputLabel >Arrival</InputLabel>
                         <TextField
                             style={{ width: "200px", margin: "5px" }}
                             type="date"
-                            label="Checkin"
                             name="checkin"
                             variant="outlined"
                             onChange={onChangeInput}
-                            value={details.email}
+                            value={details.checkin}
                         />
                         <br />
+                        <InputLabel >Departure</InputLabel>
                         <TextField
                             style={{ width: "200px", margin: "5px" }}
                             type="date"
                             name="checkout"
-                            label="Checkout"
                             variant="outlined"
                             onChange={onChangeInput}
-                            value={details.mobile}
+                            value={details.checkout}
                         />
                         <br />
                         <InputLabel >Room Type</InputLabel>
                         <Select
                             style={{ width: "200px", margin: "5px" }}
                             id="demo-simple-select"
-                            value={details.city}
+                            value={details.roomType}
                             variant="outlined"
                             label="Room type"
                             name="roomType"
                             onChange={onChangeInput}
                         >
-                            <MenuItem>Normal</MenuItem>
-                            <MenuItem>Delux</MenuItem>
-                            <MenuItem>Super Delux</MenuItem>
+                            <MenuItem value={"Normal"}>Normal</MenuItem>
+                            <MenuItem value={"Delux"}>Delux</MenuItem>
+                            <MenuItem value={"Super Delux"}>Super Delux</MenuItem>
                         </Select>
                         <br /><br/>
                         <Button variant="contained" color="primary" onClick={save}>

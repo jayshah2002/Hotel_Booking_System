@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Project_Hotel.Model;
 
@@ -11,9 +12,11 @@ using Project_Hotel.Model;
 namespace Project_Hotel.Migrations
 {
     [DbContext(typeof(HotelDBContext))]
-    partial class HotelDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230326083331_books")]
+    partial class books
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -39,13 +42,18 @@ namespace Project_Hotel.Migrations
                     b.Property<string>("Room_type")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserName")
+                        .HasColumnType("int");
 
                     b.Property<int>("noOfPersons")
                         .HasColumnType("int");
 
                     b.HasKey("BookId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Bookings");
                 });
@@ -85,6 +93,18 @@ namespace Project_Hotel.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("Project_Hotel.Model.Booking", b =>
+                {
+                    b.HasOne("Project_Hotel.Model.User", null)
+                        .WithMany("Book")
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("Project_Hotel.Model.User", b =>
+                {
+                    b.Navigation("Book");
                 });
 #pragma warning restore 612, 618
         }

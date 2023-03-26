@@ -24,6 +24,10 @@ namespace Project_Hotel.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
+          if (_context.Users == null)
+          {
+              return NotFound();
+          }
             return await _context.Users.ToListAsync();
         }
 
@@ -31,6 +35,10 @@ namespace Project_Hotel.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(int id)
         {
+          if (_context.Users == null)
+          {
+              return NotFound();
+          }
             var user = await _context.Users.FindAsync(id);
 
             if (user == null)
@@ -77,6 +85,10 @@ namespace Project_Hotel.Controllers
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
+          if (_context.Users == null)
+          {
+              return Problem("Entity set 'HotelDBContext.Users'  is null.");
+          }
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
@@ -87,6 +99,10 @@ namespace Project_Hotel.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(int id)
         {
+            if (_context.Users == null)
+            {
+                return NotFound();
+            }
             var user = await _context.Users.FindAsync(id);
             if (user == null)
             {
@@ -101,7 +117,7 @@ namespace Project_Hotel.Controllers
 
         private bool UserExists(int id)
         {
-            return _context.Users.Any(e => e.Id == id);
+            return (_context.Users?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

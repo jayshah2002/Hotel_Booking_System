@@ -7,53 +7,41 @@ import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 
 function BookingUpdate() {
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [mobile, setMobile] = useState('');
-    const [city, setCity] = useState('');
-    const [state, setState] = useState('');
-    const [address, setAddress] = useState('');
-    const [id, setId] = useState(null);
+    const [bookid, setId] = useState(null);
+    const [person, setperson] = useState(null);
+    const [checkin, setcheckin] = useState(null);
+    const [checkout, setcheckout] = useState(null);
+    const [room_type, setroom_type] = useState(null);
 
     useEffect(() => {
         setId(localStorage.getItem('Id'));
-        setName(localStorage.getItem('Name'));
-        setEmail(localStorage.getItem('Email'));
-        setMobile(localStorage.getItem('Mobile'));
-        setCity(localStorage.getItem('City'));
-        setState(localStorage.getItem('State'));
-        setAddress(localStorage.getItem('Address'));
+        setperson(localStorage.getItem('Name'));
+        setcheckin(localStorage.getItem('Checkin'));
+        setcheckout(localStorage.getItem('Checkout'));
+        setroom_type(localStorage.getItem('RoomType'));
     }, []);
-
+    const username=localStorage.getItem("Username")
     const updateData = () => {
-        axios.put(`https://localhost:7200/api/Customers/${id}`, {
-            cust_id: id,
-            name: name,
-            email: email,
-            mobile: mobile,
-            city: city,
-            state: state,
-            address: address
+        axios.put(`https://localhost:7159/api/Bookings/${bookid}`, {
+            bookId: bookid,
+            userName:username,
+            noOfPersons: person,
+            Checkin: checkin,
+            Checkout: checkout,
+            Room_type: room_type,
         })
-        alert("Your Profile is Update SuccessFully");
+        alert("Your Booking Details is Update SuccessFully");
     }
     return (
         <div>
-        <MenuAppBar/>
-        <center>
-        <div className="info container">Update Your Booking Details</div><br />
+            <MenuAppBar />
+            <center>
+                <div className="info container">Update Your Booking Details</div><br />
 
-        <div className="container mt-4">
+
+                <div className="container mt-4">
                     <form>
-                        <input
-                            type="text"
-                            className="form-control"
-                            id="bookid"
-                            name="bookid"
-                            hidden
-                            value={id}
-                            onChange = {(e) => setName(e.target.value)} 
-                        />
+
 
 
                         <TextField
@@ -62,59 +50,59 @@ function BookingUpdate() {
                             label="Number of Persons"
                             name="person"
                             variant="outlined"
-                            value={name}
-                            onChange = {(e) => setName(e.target.value)} 
+                            value={person}
+                            onChange={(e) => setperson(e.target.value)}
                         />
                         <br />
+                        <InputLabel >Arrival</InputLabel>
                         <TextField
                             style={{ width: "200px", margin: "5px" }}
                             type="date"
-                            label="Checkin"
                             name="checkin"
                             variant="outlined"
-                            onChange = {(e) => setName(e.target.value)} 
-                            value={email}
+                            onChange={(e) => setcheckin(e.target.value)}
+                            value={checkin}
                         />
                         <br />
+                        <InputLabel >Departure</InputLabel>
                         <TextField
                             style={{ width: "200px", margin: "5px" }}
                             type="date"
                             name="checkout"
-                            label="Checkout"
                             variant="outlined"
-                            onChange = {(e) => setName(e.target.value)} 
-                            value={mobile}
+                            onChange={(e) => setcheckout(e.target.value)}
+                            value={checkout}
                         />
                         <br />
                         <InputLabel >Room Type</InputLabel>
                         <Select
                             style={{ width: "200px", margin: "5px" }}
                             id="demo-simple-select"
-                            value={city}
+                            value={room_type}
                             variant="outlined"
                             label="Room type"
                             name="roomType"
-                            onChange = {(e) => setName(e.target.value)} 
+                            onChange={(e) => setroom_type(e.target.value)}
                         >
-                            <MenuItem>Normal</MenuItem>
-                            <MenuItem>Delux</MenuItem>
-                            <MenuItem>Super Delux</MenuItem>
+                            <MenuItem value={"Normal"}>Normal</MenuItem>
+                            <MenuItem value={"Delux"}>Delux</MenuItem>
+                            <MenuItem value={"Super Delux"}>Super Delux</MenuItem>
                         </Select>
-                        <br /><br/>
-                        
+                        <br /><br />
+                        <Button variant="contained" color="primary" onClick={updateData}>
+                            Update Your Booking Details
+                        </Button>
 
 
                     </form>
                 </div>
-<br></br>
-          
-           
-            <br />
-            <Button variant="contained" color="primary" onClick={updateData}>
-              Update Profile
-            </Button>
-    </center>
-            </div>
+                <br></br>
+
+
+                <br />
+               
+            </center>
+        </div>
     );
 }
 
