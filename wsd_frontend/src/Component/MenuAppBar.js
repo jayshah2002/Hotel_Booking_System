@@ -25,6 +25,12 @@ export default function MenuAppBar() {
         setDetail(response.data);
         setData(localStorage.getItem("Token"))
       })
+      axios.get('https://localhost:7159/api/Bookings')
+      .then((response) => {
+        console.log(response.data)
+        setDetail(response.data);
+        setData(localStorage.getItem("bookID"))
+      })
   }, [])
 
   // const getData = () => {

@@ -68,7 +68,7 @@ export default function Login() {
     }
     return (
         <ThemeProvider theme={theme}>
-            <Container component="main" maxWidth="xs">
+            <Container component="main" maxWidth="xs" style={{borderRadius:"5%",marginTop:"10%"}}>
                 <CssBaseline />
                 <Box
                     sx={{
@@ -76,6 +76,7 @@ export default function Login() {
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
+                        
                     }}
                 >
                     <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
@@ -87,11 +88,12 @@ export default function Login() {
                     <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
                         <TextField
                             margin="normal"
-                            required
+                            
                             fullWidth
                             id="username"
                             label="UserName"
                             name="username"
+                            required
                             type='text'
                             onChange={onChangeInput}
                             value={login.username}
@@ -99,10 +101,11 @@ export default function Login() {
                         />
                         <TextField
                             margin="normal"
-                            required
+                           
                             fullWidth
                             name="password"
                             label="Password"
+                            required
                             type="password"
                             id="password"
                             onChange={onChangeInput}

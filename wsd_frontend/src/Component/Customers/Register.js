@@ -99,6 +99,7 @@ function ProfileCreate() {
                   label="UserName"
                   name="username"
                   variant="outlined"
+                  required
                   value={details.username}
                   onChange={onChangeInput}
                 />
@@ -109,6 +110,7 @@ function ProfileCreate() {
                   type="password"
                   label="Password"
                   name="password"
+                  required
                   variant="outlined"
                   value={details.password}
                   onChange={onChangeInput}
@@ -120,6 +122,7 @@ function ProfileCreate() {
                   type="text"
                   label="Name"
                   name="name"
+                  required
                   variant="outlined"
                   value={details.name}
                   onChange={onChangeInput}
@@ -132,6 +135,7 @@ function ProfileCreate() {
                   label="Email"
                   name="email"
                   variant="outlined"
+                  required
                   onChange={onChangeInput}
                   value={details.email}
                 />
@@ -143,6 +147,7 @@ function ProfileCreate() {
                   name="mobile"
                   label="Mobile number"
                   variant="outlined"
+                  required
                   onChange={onChangeInput}
                   value={details.mobile}
                 />
@@ -154,6 +159,7 @@ function ProfileCreate() {
                   label="City"
                   name="city"
                   variant="outlined"
+                  required
                   onChange={onChangeInput}
                   value={details.city}
                 />
@@ -165,6 +171,7 @@ function ProfileCreate() {
                   label="State"
                   name="state"
                   variant="outlined"
+                  required
                   onChange={onChangeInput}
                   value={details.state}
                 />
@@ -176,6 +183,7 @@ function ProfileCreate() {
                   label="Address"
                   name="address"
                   variant="outlined"
+                  required
                   onChange={onChangeInput}
                   value={details.address}
                 />

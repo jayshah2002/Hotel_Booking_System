@@ -4,42 +4,40 @@ import { TextField, Button } from "@mui/material";
 import MenuAppBar from "../MenuAppBar";
 
 function ProfileUpdate() {
-    const [name, setName] = useState('');
-  
-    const [email, setEmail] = useState('');
-    const [mobile, setMobile] = useState('');
-    const [city, setCity] = useState('');
-    const [state, setState] = useState('');
-    const [address, setAddress] = useState('');
-    const [id, setId] = useState(null);
-
+  const [detail,setDetail]=useState({id:"",name:"",email:"",mobile:"",city:"",state:"",country:"",address:""});
+    detail.id=localStorage.getItem("Id");
+    const getData = () => {
+      axios.get(`https://localhost:7159/api/Users/${detail.id}`)
+      .then((getData)=>{
+        setDetail(getData.data);
+      })
+    }
     useEffect(() => {
-        setId(localStorage.getItem('Id'));
-        setName(localStorage.getItem('Name'));
-        setEmail(localStorage.getItem('Email'));
-        setMobile(localStorage.getItem('Mobile'));
-        setCity(localStorage.getItem('City'));
-        setState(localStorage.getItem('State'));
-        setAddress(localStorage.getItem('Address'));
+        getData();
     }, []);
     const username=localStorage.getItem('Username')
     const password=localStorage.getItem("Password")
-    console.log(id)
+    console.log(detail.id)
     const updateData = () => {
-        axios.put(`https://localhost:7159/api/Users/${id}`, {
-            Id: id,
+        axios.put(`https://localhost:7159/api/Users/${detail.id}`, {
+            Id: detail.id,
             username:username,
             password:password,
-            name: name,
-            email: email,
-            mobile: mobile,
-            city: city,
-            state: state,
-            address: address
+            name: detail.name,
+            email: detail.email,
+            mobile: detail.mobile,
+            city: detail.city,
+            state: detail.state,
+            address: detail.address
         })
-        console.log(name)
-        console.log(email)
+        
         alert("Your Profile is Update SuccessFully");
+    }
+    let name,value;
+    const handler=(e)=>{
+      name = e.target.name;
+    value = e.target.value;
+    setDetail({ ...detail, [name]: value });
     }
     return (
         <div>
@@ -52,65 +50,65 @@ function ProfileUpdate() {
   <form>
     
       <TextField
-        style={{ width: "200px", margin: "5px" }}
+        style={{ width: "500px", margin: "13px" }}
         type="text"
         label="Name"
         name="name"
         variant="outlined"
-        value={name}
-        onChange = {(e) => setName(e.target.value)} 
+        value={detail.name}
+        onChange = {handler} 
         />
    
       
       <br />
       <TextField
-        style={{ width: "200px", margin: "5px" }}
+        style={{ width: "500px", margin: "13px" }}
         type="email"
         label="Email"
         name="email"
         variant="outlined"
-        onChange = {(e) => setEmail(e.target.value)} 
-        value={email}
+        onChange = {handler} 
+        value={detail.email}
         />
       <br />
       <TextField
-        style={{ width: "200px", margin: "5px" }}
+        style={{ width: "500px", margin: "13px" }}
         type="number"
         name="mobile"
         label="Mobile number"
         variant="outlined"
-        onChange = {(e) => setMobile(e.target.value)} 
-        value={mobile}
+        onChange = {handler} 
+        value={detail.mobile}
         />
       <br />
       <TextField
-        style={{ width: "200px", margin: "5px" }}
+        style={{ width: "500px", margin: "13px" }}
         type="text"
         label="City"
         name="city"
         variant="outlined"
-        onChange = {(e) => setCity(e.target.value)} 
-        value={city}
+        onChange = {handler} 
+        value={detail.city}
       />
       <br />
       <TextField
-        style={{ width: "200px", margin: "5px" }}
+        style={{ width: "500px", margin: "13px" }}
         type="text"
         label="State"
         name="state"
         variant="outlined"
-        onChange = {(e) => setState(e.target.value)} 
-        value={state}
+        onChange = {handler} 
+        value={detail.state}
         />
       <br />
       <TextField
-        style={{ width: "200px", margin: "5px" }}
+        style={{ width: "500px", margin: "13px" }}
         type="address"
         label="Address"
         name="address"
         variant="outlined"
-        onChange = {(e) => setAddress(e.target.value)} 
-        value={address}
+        onChange = {handler} 
+        value={detail.address}
         />
       <br />
       
@@ -118,9 +116,7 @@ function ProfileUpdate() {
   </form>
 </div>
 <br></br>
-          
            
-            <br />
             <Button variant="contained" color="primary" onClick={updateData}>
               Update Profile
             </Button>

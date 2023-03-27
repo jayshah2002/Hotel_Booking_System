@@ -8,8 +8,8 @@ import TableRow from "@mui/material/TableRow";
 import { Button } from '@mui/material';
 import axios from 'axios';
 import "react-bootstrap"
-import { Link } from "react-router-dom";
 import './Customer.css';
+
 // console.log("Customer")
 function ProfileRead() {
     <MenuAppBar/>
@@ -75,7 +75,7 @@ function ProfileRead() {
                             <TableCell >{data.state}</TableCell>
                             <TableCell >{data.address}</TableCell>
                             
-                            <TableCell ><Button onClick={()=>onDelete(data.id)}>Delete</Button></TableCell>
+                            <TableCell ><Button  onClick={()=>onDelete(data.id)}>Delete</Button></TableCell>
                         </TableRow>
                         )
                     }

@@ -65,7 +65,7 @@ function BookingCreate() {
 
 
                         <TextField
-                            style={{ width: "200px", margin: "5px" }}
+                            style={{ width: "500px", margin: "5px" }}
                             type="number"
                             label="Number of Persons"
                             name="person"
@@ -76,7 +76,7 @@ function BookingCreate() {
                         <br />
                         <InputLabel >Arrival</InputLabel>
                         <TextField
-                            style={{ width: "200px", margin: "5px" }}
+                            style={{ width: "500px", margin: "5px" }}
                             type="date"
                             name="checkin"
                             variant="outlined"
@@ -86,7 +86,7 @@ function BookingCreate() {
                         <br />
                         <InputLabel >Departure</InputLabel>
                         <TextField
-                            style={{ width: "200px", margin: "5px" }}
+                            style={{ width: "500px", margin: "5px" }}
                             type="date"
                             name="checkout"
                             variant="outlined"
@@ -96,7 +96,7 @@ function BookingCreate() {
                         <br />
                         <InputLabel >Room Type</InputLabel>
                         <Select
-                            style={{ width: "200px", margin: "5px" }}
+                            style={{ width: "500px", margin: "5px" }}
                             id="demo-simple-select"
                             value={details.roomType}
                             variant="outlined"
