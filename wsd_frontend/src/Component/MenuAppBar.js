@@ -9,11 +9,12 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import { NavLink, useNavigate } from 'react-router-dom';
-
+import { Button } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 export default function MenuAppBar() {
+  const user=localStorage.getItem('Username');
   const [auth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [detail, setDetail] = useState([]);
@@ -102,6 +103,7 @@ export default function MenuAppBar() {
               >
                 <AccountCircle />
               </IconButton>
+              {/* <Button>Home</Button> */}
               <Menu
                 id="menu-appbar"
                 anchorEl={anchorEl}

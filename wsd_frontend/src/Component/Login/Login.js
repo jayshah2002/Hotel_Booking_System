@@ -67,7 +67,7 @@ export default function Login() {
         navigate('/register')
     }
     return (
-        <ThemeProvider theme={theme}>
+        <ThemeProvider theme={theme} >
             <Container component="main" maxWidth="xs" style={{borderRadius:"5%",marginTop:"10%"}}>
                 <CssBaseline />
                 <Box

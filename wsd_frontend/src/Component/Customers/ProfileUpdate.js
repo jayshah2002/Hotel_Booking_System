@@ -40,7 +40,7 @@ function ProfileUpdate() {
     setDetail({ ...detail, [name]: value });
     }
     return (
-        <div>
+        <div class="bg-[url('https://img.freepik.com/free-vector/hand-painted-watercolor-pastel-sky-background_23-2148902771.jpg?w=2000')]">
         <MenuAppBar/>
         <center>
         <div className="info container">Update Your Profile</div><br />

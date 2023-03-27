@@ -5,6 +5,7 @@ import MenuAppBar from "../MenuAppBar";
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
+import Footer from "../footer";
 
 function BookingUpdate() {
     const [book,setbook]=useState({bookid:"",noOfPersons:"",checkin:"",checkout:"",room_type:""})
@@ -40,7 +41,8 @@ function BookingUpdate() {
         alert("Your Booking Details is Update SuccessFully");
     }
     return (
-        <div>
+        
+        <div class="bg-[url('https://img.freepik.com/free-vector/hand-painted-watercolor-pastel-sky-background_23-2148902771.jpg?w=2000')] ">
             <MenuAppBar />
             <center>
                 <div className="info container">Update Your Booking Details</div><br />
@@ -109,7 +111,9 @@ function BookingUpdate() {
                 <br />
                
             </center>
+            <Footer />
         </div>
+        
     );
 }
 

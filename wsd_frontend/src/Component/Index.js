@@ -2,6 +2,9 @@ import React from 'react';
 import MenuAppBar from './MenuAppBar';
 import DemoCarousel from './Carosuel';
 import DemoCard from './Card';
+import HotelImage from './hotelimage';
+import HotelFaculity from './hotelfaculity';
+import Footer from './footer';
 
 // console.log("Index")
 function Index() {
@@ -9,12 +12,9 @@ function Index() {
         <div>
           <MenuAppBar/>  
           <DemoCarousel/>
-          <div className="container whole">
-                <div className="head container">Explore our City...</div><br />
-                <div className="row">
-                      <DemoCard/>
-                </div>
-            </div>
+          <HotelImage />
+          <HotelFaculity />
+         <Footer />
         </div>
     );
 }

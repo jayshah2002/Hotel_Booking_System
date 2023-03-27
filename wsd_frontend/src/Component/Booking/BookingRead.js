@@ -43,7 +43,7 @@ function BookingRead() {
         <div>
         <MenuAppBar />
         <div>
-        <div className="info container">Booking Customers</div><br />
+        <div className="info container">Booking Details</div><br />
           <Table>
             <TableHead>
               <TableRow>

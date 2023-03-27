@@ -6,6 +6,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import axios from 'axios';
+import Footer from '../footer';
 
 function BookingCreate() {
 
@@ -46,7 +47,7 @@ function BookingCreate() {
     }
 
     return (
-        <div>
+        <div class="bg-[url('https://img.freepik.com/free-vector/hand-painted-watercolor-pastel-sky-background_23-2148902771.jpg?w=2000')] ">
             <MenuAppBar />
             <div className="info container">Book your Room</div><br />
             <center>
@@ -119,7 +120,7 @@ function BookingCreate() {
                 <br></br>
             </center>
 
-
+        <Footer/>
 
         </div>
     );
