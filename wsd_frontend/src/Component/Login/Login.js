@@ -40,7 +40,7 @@ export default function Login() {
                         localStorage.setItem("Username",res.data.username)
                         localStorage.setItem("Password",res.data.password)
                         localStorage.setItem("Token",res.data.token)
-                        alert("Thanks!! Your SuccessFully Login");
+                        alert("You have SuccessFully Login");
                         navigate('/')
                   }
                   else {

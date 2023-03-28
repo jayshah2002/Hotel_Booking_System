@@ -38,7 +38,7 @@ function ProfileCreate() {
 
       });
       console.log(obj.data)
-      alert("Thanks!! Your Profile is being Created Succesfully");
+      alert("Your Profile is being Created Succesfully");
       navigate('/login')
       setdetail("");
 
